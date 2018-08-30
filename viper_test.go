@@ -439,7 +439,7 @@ func TestAllKeys(t *testing.T) {
 
 	var allkeys sort.StringSlice
 	allkeys = AllKeys()
-	allkeys.Sort()
+	// allkeys should already be sorted
 	ks.Sort()
 
 	assert.Equal(t, ks, allkeys)

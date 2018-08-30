@@ -29,6 +29,7 @@ import (
 	"os"
 	"path/filepath"
 	"reflect"
+	"sort"
 	"strings"
 	"time"
 
@@ -1592,6 +1593,12 @@ func (v *Viper) AllKeys() []string {
 	for x := range m {
 		a = append(a, x)
 	}
+
+	// Sort the resulting keys to ensure iteration order makes sense, with more specific keys
+	// coming later to override earlier keys. This is only an issue where an earlier key has
+	// a map value that in turn writes to those more specific keys.
+	sort.Strings(a)
+
 	return a
 }
 
